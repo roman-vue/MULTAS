@@ -11,8 +11,8 @@ export class MultasService {
   async create(createMultaDto: CreateMultaDto) {
     const find = await this.multasModule.findOne({vehiclePlate: createMultaDto.vehiclePlate})
     if(find){
-      for (let iterable of createMultaDto.fail) {
-        find.fail.push(iterable);
+      for (let iterable of createMultaDto.traffic_fines) {
+        find.traffic_fines.push(iterable);
         const addMulta = new this.multasModule(find)
         const add = await addMulta.save();
         return add
@@ -28,9 +28,16 @@ export class MultasService {
     return findAll
   }
 
-async findOne(vehiclePlate: string) {
-    const find = await this.multasModule.findOne({vehiclePlate})
-    return find
+  async findOne(vehiclePlate: string) {
+    const find = await this.multasModule.findOne({ vehiclePlate }).lean();
+    
+    // El método .lean() convierte el resultado en un objeto JavaScript plano
+    const result = {
+      ...find,
+      hasTraffic_fine: find.traffic_fines.length > 0,
+      count: find.traffic_fines.length,
+    };
+    return result;
   }
-
+  
 }

@@ -1,7 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 
-class FAIL{
+class traffic_fines{
+    @ApiProperty()
+    date:string
     @ApiProperty()
     description: string
     @ApiProperty()
@@ -17,8 +19,8 @@ export class CreateMultaDto {
     @ApiProperty({ description: 'Modelo del vehículo' })
     model: string;
   
-    @ApiProperty({ description: 'Falla o infracción cometida', type: [FAIL] })
-    fail: [FAIL];
+    @ApiProperty({ description: 'Falla o infracción cometida', type: [traffic_fines] })
+    traffic_fines: [traffic_fines];
   
     @ApiProperty({ description: 'Tipo de vehículo' })
     vehicleType: string;

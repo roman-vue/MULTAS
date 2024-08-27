@@ -7,7 +7,7 @@ export type MultasHistory = HydratedDocument<Multas>;
 export class Multas {
   @Prop({ unique: true })
   vehiclePlate: string;
-
+  
   @Prop()
   brand: string;
 
@@ -15,7 +15,7 @@ export class Multas {
   model: string;
 
   @Prop()
-  fail: Array<Object>;
+  traffic_fines: Array<Object>;
 
   @Prop()
   vehicleType: string;
